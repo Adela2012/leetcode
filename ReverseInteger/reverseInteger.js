@@ -8,8 +8,6 @@ var reverse = function(x) {
         res = res * 10 + x % 10;
         x = parseInt(x / 10);
     }
-    if(res > Math.pow(2,31) || -res > Math.pow(2,31)){  
-       res = 0;  
-    } 
+    res = (res > Math.pow(2,31) || -res > Math.pow(2,31)) ? 0 : res;
     return res;
 };

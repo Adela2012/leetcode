@@ -3,7 +3,6 @@
  * @return {number}
  */
 var numUniqueEmails = function(emails) {
-  let count = 0
   let set = new Set()
   
   emails.forEach(i => {

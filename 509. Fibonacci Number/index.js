@@ -9,3 +9,4 @@ var fib = function(N) {
   }
   return arr[N]
 };
+// 56 ms	33.7 MB

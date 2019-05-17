@@ -1,4 +1,4 @@
-1042. Flower Planting With No Adjacent
+ 1042. Flower Planting With No Adjacent
 Easy
 
 You have N gardens, labelled 1 to N.  In each garden, you want to plant one of 4 types of flowers.

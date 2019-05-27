@@ -5,7 +5,7 @@
 
 <br><br><br>
 
-## 【目录】：
+## 目录
 
 - [x] <a href='#sliding-window'>滑动窗口</a>
 - [ ] <a href='#wait'>路径（深度优先（DFS）、广度优先（BFS））</a>
@@ -22,7 +22,7 @@
 
 <br><br><br>
 
-## 【内容】：
+## 内容
 
 ### <a name='#sliding-window'>滑动窗口</a>
 

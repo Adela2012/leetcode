@@ -3,7 +3,9 @@
 
 对一些比较经典的题型进行分类总结。
 
-##【目录】：
+<br><br><br>
+
+## 【目录】：
 
 - [x] <a href='#sliding-window'>滑动窗口</a>
 - [ ] <a href='#wait'>路径（深度优先（DFS）、广度优先（BFS））</a>
@@ -18,15 +20,16 @@
 - [ ] <a href='#wait'>二进制</a>
 
 
+<br><br><br>
 
-
-##【内容】：
+## 【内容】：
 
 ### <a name='#sliding-window'>滑动窗口</a>
 
 #### 原题 [1052. Grumpy Bookstore Owner](https://leetcode.com/problems/grumpy-bookstore-owner/)
 
 【题目】
+
 ```
 Today, the bookstore owner has a store open for customers.length minutes.  Every minute, some number of customers (customers[i]) enter the store, and all those customers leave after the end of that minute.
 
@@ -35,12 +38,12 @@ On some minutes, the bookstore owner is grumpy.  If the bookstore owner is grump
 The bookstore owner knows a secret technique to keep themselves not grumpy for X minutes straight, but can only use it once.
 
 Return the maximum number of customers that can be satisfied throughout the day.
-
 ```
 
 这道题是说，在`grumpy`数组的i项`grumpy[i]`为0时，计算`Customers`同下标i的数量`Customers[i]`。同时，有`X`连续时间，可以无视`grumpy`的值。那么这个`X`就是窗口长度了。
 
 【举例】
+
 ```
 Input: customers = [1,0,1,2,1,1,7,5], grumpy = [0,1,0,1,0,1,0,1], X = 3
 Output: 16
@@ -69,8 +72,6 @@ var maxSatisfied = function(customers, grumpy, X) {
         if ( i >= X) win -= grumpy[i-X] * customers[i-X]
         maxWin = Math.max(win, maxWin)
     }
-    
-    
     return sum + maxWin
 };
 ```

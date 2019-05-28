@@ -24,7 +24,7 @@
 
 ## 内容
 
-### <a name='#sliding-window'>滑动窗口</a>
+### <a name='sliding-window'>滑动窗口</a>
 
 #### 原题 [1052. Grumpy Bookstore Owner](https://leetcode.com/problems/grumpy-bookstore-owner/)
 
@@ -75,4 +75,6 @@ var maxSatisfied = function(customers, grumpy, X) {
     return sum + maxWin
 };
 ```
+
+
 

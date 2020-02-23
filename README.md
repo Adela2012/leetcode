@@ -27,7 +27,7 @@
 - [x] [滑动窗口](./articles/sliding-window.md)
 - [ ] 排序
 - [ ] [递归](./articles/recursive.md)
-- [ ] 二分查找
+- [x] [二分查找](./articles/binary-search.md)
 - [ ] 回溯算法
 - [ ] 分治算法
 - [ ] 贪心算法
@@ -47,6 +47,11 @@
 <br><br><br>
 
 ## 题目
+1. [【2020-02-23】875. 爱吃香蕉的珂珂](https://github.com/Adela2012/leetcode/issues/8)
+1. [【2020-02-22】1011. 在 D 天内送达包裹的能力](https://github.com/Adela2012/leetcode/issues/7)
+1. [【2020-02-21】1339. 分裂二叉树的最大乘积](https://github.com/Adela2012/leetcode/issues/6)
+1. [【2020-01-24】494. Target Sum](https://github.com/Adela2012/leetcode/issues/5)
+1. [【2020-01-18】207. Course Schedule](https://github.com/Adela2012/leetcode/issues/4)
 1. [【2020-01-16】199. Binary Tree Right Side View](https://github.com/Adela2012/leetcode/issues/3)
 1. [【2020-01-15】130. Surrounded Regions](https://github.com/Adela2012/leetcode/issues/2)
 1. [【2020-01-09】114. Flatten Binary Tree to Linked List](https://github.com/Adela2012/leetcode/issues/1)

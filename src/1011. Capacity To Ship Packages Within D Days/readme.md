@@ -65,7 +65,7 @@ Medium
 1. 最后判断D是否大于0，即为能否在D天内运完
 
 - 复杂度分析
-    - 时间复杂度：O(NlogN)，其中 N = weights.length
+    - 时间复杂度：O(NlogW)，其中 N = weights.length，W = sum(weights[i])
     - 空间复杂度：O(1)
 
 ```js

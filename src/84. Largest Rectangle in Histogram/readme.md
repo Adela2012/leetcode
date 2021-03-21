@@ -22,6 +22,8 @@ Input: [2,1,5,6,2,3]
 Output: 10
 ```
 
+![logo](https://img.alicdn.com/imgextra/i4/491624867/O1CN01StBSpI1lp8IsYG8Cz_!!491624867.png){:width="0" height="0" align="left"}
+
 ## 84. 柱状图中最大的矩形
 给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。
 

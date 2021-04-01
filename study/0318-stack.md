@@ -78,3 +78,4 @@ stack size (kbytes) 8192, 线程栈大小约8M。
 20|有效的括号 |[JS](../src/20.%20Valid%20Parentheses/index.md) | N
 145|二叉树的后序遍历 |[JS](../src/145.%20Binary%20Tree%20Postorder%20Traversal/readme.md) | N
 232|化栈为队 |[JS](../src/232.%20Implement%20Queue%20using%20Stacks/readme.md) | Y
+682|棒球比赛 |[JS](../src/682.%20Baseball%20Game/readme.md) | N

@@ -54,7 +54,7 @@ stack size (kbytes) 8192, 线程栈大小约8M。
 
 
 栈的基本操作 
-- Leetcode-面试题 03.04-化栈为队 (232)
+- Leetcode-232-化栈为队 (面试题 03.04)
 - Leetcode-682-棒球比赛 
 - Leetcode-844-比较含退格的字符串 
 - Leetcode-946-验证栈序列 
@@ -80,3 +80,4 @@ stack size (kbytes) 8192, 线程栈大小约8M。
 232|化栈为队 |[JS](../src/232.%20Implement%20Queue%20using%20Stacks/readme.md) | Y
 682|棒球比赛 |[JS](../src/682.%20Baseball%20Game/readme.md) | N
 844|比较含退格的字符串 |[JS](../src/844.%20Backspace%20String%20Compare/readme.md) | N
+946|验证栈序列 |[JS](../src/946.%20Validate%20Stack%20Sequences/readme.md) | N

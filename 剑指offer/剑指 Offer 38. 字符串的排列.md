@@ -20,6 +20,7 @@
 
 # 解题
 
+## 解法1
 ```js
 /**
  * @param {string} s
@@ -54,5 +55,54 @@ function swap(arr, x, y) {
     const tmp = arr[x]
     arr[x] = arr[y]
     arr[y] = tmp
+}
+```
+
+## 解法2
+```js
+/**
+ * @param {string} s
+ * @return {string[]}
+ */
+var permutation = function(s) {
+    const res = new Set()
+    backtrack(s, '', [], res)
+    return [...res]
+};
+
+function backtrack(chars, temp, visited, res) {
+    if (temp.length == chars.length) {
+        res.add(temp)
+        return
+    }
+
+    for (let i = 0; i < chars.length; i++) {
+        if (visited[i]) continue
+        visited[i] = true
+        backtrack(chars, temp+chars[i], visited, res) 
+        visited[i] = false
+    }
+}
+```
+
+回溯算法经典模板
+```js
+function backtrack("原始参数") {
+    //终止条件(递归必须要有终止条件)
+    if ("终止条件") {
+        //一些逻辑操作（可有可无，视情况而定）
+        return;
+    }
+
+    for (let i = "for循环开始的参数"; i < "for循环结束的参数"; i++) {
+        //一些逻辑操作（可有可无，视情况而定）
+        //做出选择
+
+        //递归
+        backtrack("新的参数");
+
+        //一些逻辑操作（可有可无，视情况而定）
+        //撤销选择
+    }
 }
 ```

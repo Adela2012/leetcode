@@ -21,6 +21,14 @@
 最多会对 appendTail、deleteHead 进行 10000 次调用
 
 # 解题
+1. 维护两个栈，
+   1. 一个专门用于模拟队列的尾部入队stackAdd；
+   2. 一个专门用于模拟队列头部出队stackDel。
+2. appendTail入队时，只需要把值推入stackAdd栈中就行。
+3. deleteHead出队时，需要判断stackDel队列中有没有值，
+   1. 如果没有值，依次将stackAdd栈中的元素出栈，并推入stackDel栈中，这时，队列头部元素即为stackDel的顶部元素；
+   2. 如果有值，将stackDel的顶部元素出栈并返回该值；
+   3. 如果stackAdd和stackDel都没有值，说明队列为空，返回-1.
 ```js
 var CQueue = function() {
     this.stackAdd = []

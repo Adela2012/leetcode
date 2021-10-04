@@ -126,6 +126,34 @@ var copyRandomList = function(head) {
     return newHead
 };
 ```
+广度优先遍历，将重复的内容抽离出来写成方法genNode
+```js
+/**
+ * @param {Node} head
+ * @return {Node}
+ */
+var copyRandomList = function(head) {
+    let queue = [], map = new Map()
+    genNode(head)
+
+    while(queue.length) {
+        let node = queue.shift()
+        let newNode = map.get(node)
+        newNode.next = genNode(node.next)
+        newNode.random = genNode(node.random)
+    }
+    return map.get(head)
+
+    function genNode(node) {
+        if (node == null) return null
+        if (map.has(node)) return map.get(node)
+        let newNode = new Node(node.val, null, null)
+        map.set(node, newNode)
+        queue.push(node)
+        return newNode
+    }
+};
+```
 
 ## 方法3
 迭代1
@@ -144,30 +172,21 @@ var copyRandomList = function(head) {
  * @return {Node}
  */
 var copyRandomList = function(head) {
-    if (head == null) return null
-    const map =  new Map()
-    let p = head
-    let newP = new Node(p.val, null, null)
-    map.set(head, newP)
-
+    let map = new Map()
     function getNode(node) {
         if (node == null) return null
-        if (map.has(node)) {
-            return map.get(node)
-        } else {
-            let newNode = new Node(node.val, null, null)
-            map.set(node, newNode)
-            return newNode
-        }
+        if (map.has(node)) return map.get(node)
+        let newNode = new Node(node.val, null, null)
+        map.set(node, newNode)
+        return newNode
     }
+    let p = head
     while(p !== null) {
-        newP.next = getNode(p.next)
-        newP.random = getNode(p.random)
-
-        p = p.next
-        newP = newP.next
+        let newNode = getNode(p)
+         newNode.next = getNode(p.next)
+         newNode.random = getNode(p.random)
+         p = p.next
     }
-
     return map.get(head)
 };
 ```
@@ -192,8 +211,7 @@ var copyRandomList = function(head) {
     if (head == null) return null
     let p = head
     while(p !== null) {
-        let newNode = new Node(p.val, null, null) 
-        newNode.next = p.next
+        let newNode = new Node(p.val, p.next, null) 
         p.next = newNode
         p = newNode.next
     }

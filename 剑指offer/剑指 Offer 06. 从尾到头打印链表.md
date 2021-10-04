@@ -15,6 +15,7 @@
 
 
 # 解题
+此题从头到尾遍历链接，再将不为null的节点每次从头推入数组即可实现从尾到头反过来返回每个节点的值。
 ```js
 /**
  * Definition for singly-linked list.
@@ -28,11 +29,10 @@
  * @return {number[]}
  */
 var reversePrint = function(head) {
-    let p = new ListNode(null)
-    p.next = head
     let arr = []
-    while (p.next && p.next.val != null) {
-        arr.unshift(p.next.val)
+    let p = head
+    while(p && p.val !== null) {
+        arr.unshift(p.val)
         p = p.next
     }
     return arr

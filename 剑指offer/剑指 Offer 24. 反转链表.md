@@ -18,7 +18,9 @@
 注意：本题与主站 206 题相同：https://leetcode-cn.com/problems/reverse-linked-list/
 
 # 解题
-
+1. 两个指针，记录前一个节点prev和当前节点cur。
+2. 当前节点cur不为null时，先存储它的next节点指向，再将它的原来的next指向prev节点。
+3. 按顺序往下推进。
 ```js
 /**
  * Definition for singly-linked list.

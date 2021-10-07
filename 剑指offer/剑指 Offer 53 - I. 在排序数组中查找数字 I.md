@@ -21,6 +21,7 @@
 ```
 
 # 解题
+nums 是一个非递减数组，可以使用二分查找的方法确定target的下标，再从左，从右计算该值出现的次数。
 ```js
 /**
  * @param {number[]} nums
@@ -79,3 +80,6 @@ var search = function(nums, target) {
     }
 };
 ```
+
+- 时间复杂度： O(logn)
+- 空间复杂度：O(1)

@@ -14,6 +14,8 @@
 ```
 
 # 解题
+## 解题1 
+遍历数组，找出比前一个小的数字，返回。
 ```js
 /**
  * @param {number[]} numbers
@@ -29,8 +31,33 @@ var minArray = function(numbers) {
     return numbers[0]
 };
 ```
+- 时间复杂度： O(N)
+- 空间复杂度：O(1)
+  
+## 解题2
+遍历数组，设置最小值，找到这个最小值。
+```js
+/**
+ * @param {number[]} numbers
+ * @return {number}
+ */
+var minArray = function(numbers) {
+    let min = numbers[0]
+    for (let i of numbers) {
+        if (i < min) min = i
+    }
+    return min
+};
+```
+- 时间复杂度： O(N)
+- 空间复杂度：O(1)
 
-二分
+
+## 解题3
+二分查找法
+1. 若`numbers[mid] < numbers[right]`，说明转折点区间在左子数组`[left, mid]`，执行`right = mid`
+2. 若`numbers[mid] > numbers[right]`，说明转折点区间在右子数组`[mid + 1, right]`，执行`left = mid + 1`
+2. 若`numbers[mid] == numbers[right]`，说明转折点区间在左子数组`[left, right - 1]`，执行`right -= 1`
 ```js
 /**
  * @param {number[]} numbers
@@ -51,3 +78,5 @@ var minArray = function(numbers) {
     return numbers[left]
 };
 ```
+- 时间复杂度： O(logN)
+- 空间复杂度：O(1)

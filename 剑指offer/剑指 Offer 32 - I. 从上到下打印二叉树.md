@@ -5,24 +5,30 @@
 
 例如:
 给定二叉树: [3,9,20,null,null,15,7],
-
+```
     3
    / \
   9  20
     /  \
    15   7
+```
 返回：
-
+```
 [3,9,20,15,7]
- 
+``` 
 
 提示：
-
+```
 节点总数 <= 1000
+```
 
 # 解题
 
 **广度优先遍历**
+通过队列先进先出的特点实现层级遍历。
+1. root根节点为空时，直接返回空数组[]。
+2. 当queue队列不为空时，将队首节点node出队。
+3. 数组记录node.val，并将node.left和node.right入队。
 ```js
 /**
  * Definition for a binary tree node.
@@ -48,3 +54,5 @@ var levelOrder = function(root) {
     return res
 };
 ```
+- 时间复杂度 O(N)
+- 空间复杂度 O(N)

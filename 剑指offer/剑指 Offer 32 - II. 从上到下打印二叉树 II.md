@@ -27,7 +27,13 @@
 
 # 解题
 **解题1**
-队列中与node一起推入level的来计数层次
+
+通过队列先进先出的特点实现层级遍历。
+1. root根节点为空时，直接返回空数组[]。
+2. 初始化时，队列推入根节点和层级[root, 0]
+3. 当queue队列不为空时，将队首节点[node, level]出队。
+4. 数组判断level下标是否存在，若不存在，初始化新数组，若存在，直接推入到数组中。
+5. 依次将node.left和当前层级，node.right和当前层级，入队。
 ```js
 /**
  * Definition for a binary tree node.
@@ -54,6 +60,9 @@ var levelOrder = function(root) {
     return res
 };
 ```
+
+- 时间复杂度 O(N)
+- 空间复杂度 O(N)
 
 
 **解题2**
@@ -84,7 +93,7 @@ var levelOrder = function(root) {
 
 
 **解题3**
-递归
+递归，实现深度优先遍历。
 ```js
 
 /**
@@ -92,20 +101,16 @@ var levelOrder = function(root) {
  * @return {number[][]}
  */
 var levelOrder = function(root) {
-    let res = []
-    dfs(root, res, 0)
+    const res = []
+    dfs(root, 0)
     return res
 
-    function dfs(node, arr, level) {
-        if (node == null) return 
-        if (!res[level]) {
-            res[level] = [node.val]
-        }
-        else {
-            res[level].push(node.val)
-        }
-        if (node.left) dfs(node.left, arr, level+1) 
-        if (node.right) dfs(node.right, arr, level+1) 
+    function dfs(node, level) {
+        if (!node) return
+        if (!res[level]) res[level] = []
+        res[level].push(node.val)
+        if (node.left) dfs(node.left, level+1)
+        if (node.right) dfs(node.right, level+1)
     }
 };
 ```

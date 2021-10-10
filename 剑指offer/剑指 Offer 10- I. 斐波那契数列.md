@@ -10,34 +10,43 @@ F(N) = F(N - 1) + F(N - 2), 其中 N > 1.
  
 
 示例 1：
-
+```
 输入：n = 2
 输出：1
+```
 示例 2：
-
+```
 输入：n = 5
 输出：5
- 
+```
 
 提示：
-
+```
 0 <= n <= 100
+```
 
 # 解题
-
+动态规划方法
+1. 按照题目要求，有两个确定值：F(0) = 0, F(1) = 1，做特殊情况处理
+2. 定义两个变量，pre和cur，分别记录上一次循环的 F(N - 1) 和 F(N - 2)的值
+3. 从i = 2开始遍历，直到 i = n，每次遍历使用临时遍历tmp来记录上一次循环的 F(N - 1) + F(N - 2)的值，并取模
+4. 在下一次循环开始前，更新pre和cur的值
+5. 最后返回当前n循环的当前值cur
 ```js
 /**
  * @param {number} n
  * @return {number}
  */
 var fib = function(n) {
-    if (n < 2) return n
-    let arr = [0, 1]
+    if (n <= 1) return n
+    let pre = 0, cur = 1
     for(let i = 2; i <= n; i++) {
-        let next = arr[i-1] + arr[i-2]
-        next = next % 1000000007
-        arr.push(next)
+        let tmp = (pre + cur) % 1000000007
+        pre = cur
+        cur = tmp 
     }
-    return arr[n]
+    return cur
 };
 ```
+- 时间复杂度：O(n)
+- 空间复杂度：O(1)

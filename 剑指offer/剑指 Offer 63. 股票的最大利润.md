@@ -26,6 +26,10 @@
 ```
 # 解题
 用类似动态规划的思想，到第i天买入，那么我能赚到的最大利润是多少呢？就是i + 1 ~ n天中最大的股价减去第i天的。找最大股价的问题可以在找第i+1~n天的最大利润时顺便记录，
+1. 两个变量，maxProfit记录最大利润，minPrice计算最小价格
+2. 遍历prices，若当前price比minPrice小，minPrice为price
+3. 若当前price比minPrice大，且最大利润maxProfit比当前价格的利润小，则更新maxProfit
+4. 最后返回maxProfit
 
 ```js
 /**
@@ -44,3 +48,6 @@ var maxProfit = function(prices) {
     return maxProfit
 };
 ```
+
+- 时间复杂度：O(n)
+- 空间复杂度：O(1)

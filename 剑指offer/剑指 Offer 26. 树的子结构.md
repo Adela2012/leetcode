@@ -37,6 +37,13 @@ B是A的子结构， 即 A中有出现和B相同的结构和节点值。
 
 
 # 解题
+1. isPart：判断B是否是以A为根节点开始匹配的一部分
+   1. 如果B为空，返回true
+   2. 如果A为空或A的值不等于B的值，返回false
+   3. 继续深入比较AB的左子树和右子树
+2. isSubStructure：判断B是不是A的子结构
+   1. 如果AB任一为空，则返回false
+   2. 有三种可能性：isPart(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B)
 ```js
 /**
  * Definition for a binary tree node.
@@ -61,3 +68,5 @@ function isPart(A, B) {
     return isPart(A.left, B.left) && isPart(A.right, B.right)
 }
 ```
+- 时间复杂度 O(MN)，其中 M,N 分别为树 A 和 树 B 的节点数量
+- 空间复杂度 O(M)

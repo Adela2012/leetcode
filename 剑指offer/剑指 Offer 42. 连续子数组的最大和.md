@@ -19,7 +19,7 @@
 ```
 
 # 解题
-
+动态规划求解：采用两个变量，sum记录以num[i]结尾的连续子数组最大和，res记录最大值。
 ```js
 /**
  * @param {number[]} nums
@@ -35,3 +35,7 @@ var maxSubArray = function(nums) {
     return res
 };
 ```
+
+
+- 时间复杂度：O(MN)
+- 空间复杂度：O(1)

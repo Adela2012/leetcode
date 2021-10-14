@@ -13,6 +13,13 @@
 
 
 # 解题
+1. 新生成一个节点head，用于指向最后的结果返回。
+2. 当l1和l2都不为null时，循环遍历比较l1.val和l2.val的大小，
+3. 当l1.val比较小时，p指针指向l1，l1指向它的下一个节点
+4. 同理，l2.val比较小时，或跟l1.val相等，p指针指向l2，l2指向它的下一个节点
+5. p指向它的下一个节点
+6. 当l1和l2其中一个遍历完了，只剩下l1或l2时，p的指向指向不为null的链表
+7. 最后返回head.next
 ```js
 /**
  * Definition for singly-linked list.
@@ -28,25 +35,19 @@
  */
 var mergeTwoLists = function(l1, l2) {
     let head = new ListNode(0), p = head
-    let p1 = l1, p2 = l2
-    while(p1 && p2) {
-        if (p1.val <= p2.val) {
-            p.next = new ListNode(p1.val)
-            p = p.next
-            p1 = p1.next
-        } else if (p1.val > p2.val) {
-            p.next = new ListNode(p2.val)
-            p = p.next
-            p2 = p2.next
+    while(l1 && l2) {
+        if (l1.val < l2.val) {
+            p.next = l1
+            l1 = l1.next
+        } else {
+            p.next = l2
+            l2 = l2.next
         } 
+        p = p.next
     }
-    if (p1 !== null) {
-        p.next = p1
-    }
-    if (p2 !== null) {
-        p.next = p2
-    }
+    p.next = l1 == null ? l2 : l1
     return head.next
-    
 };
 ```
+- 时间复杂度：O(M+N)
+- 空间复杂度：O(1)

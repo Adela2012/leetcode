@@ -36,9 +36,8 @@
  * @return {string}
  */
 var reverseWords = function(s) {
-    let arr = s.split(/\s/)
-    arr.reverse()
-    arr = arr.filter(i => i)
-    return arr.join(' ')
+    return s.replace(/\s{1,}/g, ' ').split(' ').reverse().join(' ').trim()
 };
 ```
+
+

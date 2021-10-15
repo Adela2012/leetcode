@@ -23,7 +23,39 @@
 ```
 
 # 解题
-- 滑动窗口
+## 解题1
+1. 循环nums数组，使用set记录匹配当前数字i所需要的值target-i，
+2. 如果遍历的时候，发现当前数字i在set中，那么直接返回[target - i, i]
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+ var twoSum = function(nums, target) {
+    let set = new Set()
+    for (let i of nums) {
+        if (set.has(i)) {
+            return [target - i, i]
+        }
+        set.add(target - i)
+    }
+};
+```
+- 时间复杂度O(N)
+- 空间复杂度O(N)
+
+## 解题2
+1. 头尾指针
+2. 题目说明是递增排序的数组，可以从头尾开始缩小范围
+3. i指向头，j指向尾，i < j 循环继续 
+4. 变量s表示头尾数值之和
+   1. 若 s == target，返回[nums[i], nums[j]]
+   2. 若 s < target，i++
+   3. 若 s > target，j--
+5. 循环结束，没有找到，返回空数组
+   
 ```js
 /**
  * @param {number[]} nums
@@ -31,33 +63,16 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-    let i = 0, j = nums.length - 1, s = []
+    let i = 0, j = nums.length - 1
     while(i < j) {
-        s = nums[i] + nums[j]
+        let s = nums[i] + nums[j]
         if (s == target) return [nums[i], nums[j]]
-        if (s < target)  i++
-        else j--
+        else if(s > target) j--
+        else i++
     }
     return []
 };
 ```
 
-- hash
-```js
-/**
- * @param {number[]} nums
- * @param {number} target
- * @return {number[]}
- */
-var twoSum = function(nums, target) {
-    let map = new Map()
-    for (let i of nums) {
-        if (!map.has(i)) {
-            map.set(target-i, i)
-        } else {
-            return [i, target-i]
-        }
-    }
-    return []
-};
-```
+- 时间复杂度O(N)
+- 空间复杂度O(1)

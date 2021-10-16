@@ -20,6 +20,18 @@
 ```
 
 # 解题
+1. 首先生成一个m*n的数组arr，单元格里的值设置为0，表示没有走过
+2. 深度优先搜索dfs，变量i、j表示单元格下标，x、y表示下标位数和
+   1. 当以下几种情况时，不满足条件，返回0
+      1. 超出边界，i >= m || j >= n 
+      2. 已经走过，arr[i][j] == 1
+      3. 行列坐标的数位之和大于k，x + y > k
+   2. 满足条件，标记为走过，arr[i][j] = 1
+   3. 向下和向右搜索，
+      1. 向右dfs(i+1, j, h(i+1,x), y) 
+      2. 向下dfs(i, j+1, x, h(j+1, y))
+      3. h函数返回下一个单元格行列下标的位数和，如果是能被10整除，原来的位数和减8，否则加1
+         1. （举例：i = 29，x = 2 + 9 = 11；i + 1 = 30 = 3 + 0 = 3，11 - 3 = 8）
 ```js
 /**
  * @param {number} m
@@ -33,64 +45,17 @@ var movingCount = function(m, n, k) {
         arr.push(Array(n).fill(0))
     }
     return dfs(0, 0, 0, 0)
-
-
-    function dfs(i, j, ic, jc) {
-        if (i < m && j < n && arr[i][j] == 0 && ic + jc <= k) {
-            arr[i][j] = 1
-            return 1 + dfs(i, j+1, ic, h(j, jc)) + dfs(i+1, j, h(i, ic), jc)
-        }
-       return 0
+    
+    function dfs(i, j, x, y) {
+        if (i >= m || j >= n || arr[i][j] == 1 || x + y > k) return 0
+        arr[i][j] = 1
+        return 1 + dfs(i+1, j, h(i,x), y) + dfs(i, j+1, x, h(j,y))
     }
 
-    function h (x, c) {
-        return (x + 1) % 10 == 0 ? c - 8 : c + 1
+    function h(i, x) {
+        return (i + 1) % 10 == 0 ? x - 8 : x + 1
     }
-
 };
 ```
-
-- 解题2
-```js
-/**
- * @param {number} m
- * @param {number} n
- * @param {number} k
- * @return {number}
- */
-var movingCount = function(m, n, k) {
-    let count = 0, arr = []
-    for (let i = 0; i < m; i++) {
-        arr.push(Array(n).fill(0))
-    }
-    dfs(0, 0)
-    return count
-
-    function dfs(i, j) {
-        if (i < m && j < n && arr[i][j] == 0) {
-            let sum = getSum(i, j)
-            if (sum <= k) {
-                count++
-                arr[i][j] = 1
-                dfs(i,j+1)
-                dfs(i+1,j)
-            }
-        }
-       
-    }
-
-    function getSum(i, j) {
-        let sum = 0
-        while(i > 0) {
-            sum += i % 10
-            i = Math.floor(i / 10)
-        }
-        while(j > 0) {
-            sum += j % 10
-            j = Math.floor(j / 10)
-        }
-        return sum
-    }
-
-};
-```
+- 时间复杂度O(mn)
+- 空间复杂度O(mn)

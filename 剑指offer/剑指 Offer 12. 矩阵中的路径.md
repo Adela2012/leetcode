@@ -31,6 +31,14 @@ board 和 word 仅由大小写英文字母组成
 
 
 # 解题
+1. 不确定从二维字符网格board中的哪个单元格可以匹配上word首字母，开始进行深度优先搜索。
+2. 因此第一步需要遍历board，并判断dfs返回的值
+   1. 深度优先搜索dfs，入参判断有没有超出board边界，是否与word字母不同，`if (x < 0 || y < 0 || x >= N || y >= M || board[x][y] !== word[w]) return false`
+   2. 如果已经搜索到word的最后一个字母了，返回true，`if (w == word.length - 1) return true`
+   3. 已经搜索过的单元格置为null，`board[x][y] = null`
+   4. 上下左右搜索，`[[1, 0], [-1, 0], [0, 1],  [0, -1]].some(([i, j]) => dfs(x+i, y+j, w+1))`
+   5. 回退的时候将单元格还原为原来数字
+   6. 返回搜索结果
 ```js
 /**
  * @param {character[][]} board
@@ -38,22 +46,25 @@ board 和 word 仅由大小写英文字母组成
  * @return {boolean}
  */
 var exist = function(board, word) {
-    const n = board.length
-    const m = board[0].length
-    for(let i = 0; i < n;i++) {
-        for (let j = 0; j < m; j++){
-            if (dfs(i,j,0)) return true
+    const N = board.length, M = board[0].length
+    for(let i = 0; i < N; i++) {
+        for (let j = 0;j < M; j++) {
+           if(dfs(i, j, 0)) return true
         }
     }
     return false
 
-    function dfs(i, j, k) {
-        if (i < 0 || i >= n || j < 0 || j >= m || board[i][j] != word[k]) return false
-        if (k == word.length - 1) return true
-        board[i][j] = ''
-        const res = dfs(i-1, j, k+1) || dfs(i+1, j, k+1) || dfs(i, j-1, k+1) || dfs(i, j+1, k+1)
-        board[i][j] = word[k]
+    function dfs(x, y, w) {
+        if (x < 0 || y < 0 || x >= N || y >= M || board[x][y] !== word[w]) return false
+        if (w == word.length - 1) return true
+        board[x][y] = null
+        const dr = [[1, 0], [-1, 0], [0, 1],  [0, -1]]
+        res = dr.some(([i, j]) => dfs(x+i, y+j, w+1))
+        board[x][y] = word[w]
         return res
     }
 };
 ```
+
+- 时间复杂度 O(MN3^w) 
+- 空间复杂度 O(w)

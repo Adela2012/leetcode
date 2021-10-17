@@ -32,7 +32,9 @@
 ```
 
 # 解题
-二叉搜索树的节点的 右树值 > 节点值 > 左树值，因此只需要做一个深度优先遍历，顺序就是右->中->左就行
+1. 二叉搜索树的节点的 右树值 > 节点值 > 左树值
+2. 因此只需要做一个深度优先遍历，顺序就是右->中->左就行
+3. 当k <= 0的时候，说明已找到res，提前返回
 ```js
 /**
  * Definition for a binary tree node.
@@ -47,14 +49,18 @@
  * @return {number}
  */
 var kthLargest = function(root, k) {
-    let res = root.val
-    function dfs(node) {
-        if (node == null) return
-        if (node.right) dfs(node.right)
-        if (--k == 0) res = node.val
-        else if (node.left) dfs(node.left) // 避免获得目标值以后继续递归
-    }
+    let res = 0
     dfs(root)
     return res
+
+    function dfs(node) {
+        if(!node || k <= 0) return
+        dfs(node.right)
+        if (--k == 0) res = node.val
+        dfs(node.left)
+    }
 };
 ```
+
+- 时间复杂度O(N)
+- 空间复杂度O(N)

@@ -31,6 +31,10 @@
 
 # 解题
 **方法1**
+1. 深度优先搜索，从头记录节点路径
+2. 每次dfs时，入参当前节点二叉树，剩余的整数，当前节点路径数组
+3. 当节点的没有左右子节点，且num == node.val时，说明找到了该条路径
+4. 最后返回res数组
 ```js
 /**
  * Definition for a binary tree node.
@@ -61,38 +65,40 @@ var pathSum = function(root, sum) {
 ```
 
 **方法2**
-方法2是方法1优化方案，使用一个栈进行每次节点的遍历，如果子树都遍历完了，就从栈中推出该节点。
+1. 深度优先搜索，相对方法1，使用stack数组记录节点路径
+2. 使用一个栈stack记录每次遍历路径节点的值，如果子树都遍历完了，就从栈中推出该节点。
+3. 当节点的没有左右子节点，且num == 0时，将栈stack记录的值推入arr数组中
+4. 最后返回arr数组
 ```js
 /**
  * Definition for a binary tree node.
- * function TreeNode(val) {
- *     this.val = val;
- *     this.left = this.right = null;
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
  * }
  */
 /**
  * @param {TreeNode} root
- * @param {number} sum
+ * @param {number} target
  * @return {number[][]}
  */
-var pathSum = function(root, sum) {
-    if(root == null) return []
-    let res = []
+var pathSum = function(root, target) {
+    let arr = []
     let stack = []
-    dfs(root, sum)
-
+    dfs(root, target)
+    return arr
 
     function dfs(node, num) {
+        if (!node) return
         num -= node.val
         stack.push(node.val)
-        if (num == 0 && !node.left && !node.right) {
-            res.push([...stack])
-        }
-        if (node.left) dfs(node.left, num)
-        if (node.right) dfs(node.right, num)
+        if (!node.left && !node.right && !num) arr.push([...stack])
+        dfs(node.left, num)
+        dfs(node.right, num)
         stack.pop()
     }
-    return res
-
 };
 ```
+- 时间复杂度O(N)
+- 空间复杂度O(N)

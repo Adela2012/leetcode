@@ -22,20 +22,62 @@
 数组的数取值为 [0, 13] .
 ```
 # 解题
+## 解题1
+
+1. 满足顺子的条件：
+   1. 除0外的数字最大值减去最小数不超过5，max - min < 5
+   2. 除0外没有重复数字，可采用set来辅助判断
+2. 因此在遍历nums时，
+   1. 如果是0，继续循环
+   2. 如果该值已经被记录在set中，返回false
+   3. 将值添加到set中，更新max和min的值
+3. 最后返回 max-min < 5
 ```js
 /**
  * @param {number[]} nums
  * @return {boolean}
  */
 var isStraight = function(nums) {
-    let set = new Set(), max = 0, min = 14
+    let set = new Set(), max = 0, min = 13
     for (let num of nums) {
         if (num == 0) continue
         if (set.has(num)) return false
-        else set.add(num)
+        set.add(num)
         max = Math.max(num, max)
         min = Math.min(num, min)
     }
     return max - min < 5
 };
 ```
+
+> N 为常数 5
+- 时间复杂度O(N)=O(5)=O(1)
+- 空间复杂度O(N)=O(5)=O(1)
+
+## 解题2
+1. 满足顺子的条件：
+   1. 除0外的数字最大值减去最小数不超过5
+   2. 除0外没有重复数字
+2. 进行排序，
+   1. 可以得出最大值为nums[4]，最小值为不为0的nums[j]
+   2. 判断重复数字，nums[i] == nums[i+1]
+3. 最后返回 nums[4]-nums[j] < 5
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var isStraight = function(nums) {
+    nums.sort((a,b) => a - b)
+    let j = 0
+    for(let i = 0; i < 4; i++) {
+        if (nums[i] == 0) j++
+        else if (nums[i] == nums[i+1]) return false
+    }
+    return nums[4]-nums[j] < 5
+};
+```
+> N 为常数 5
+- 时间复杂度O(1)
+- 空间复杂度O(1)

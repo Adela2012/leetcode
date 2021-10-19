@@ -35,8 +35,12 @@ double findMedian() - 返回目前所有元素的中位数。
 ```
 
 # 解题
-- 从小到大排序，二分查找插入
-- 
+1. 数组从小到大排序
+2. 查找按照数组长度取中间值
+   1. 奇数返回 this.arr[mid]
+   2. 偶数返回 return (this.arr[mid] + this.arr[mid - 1]) / 2
+3. 插入使用二分法，先找到比插入值大或者跟插入值相等的位置，使用splice插入
+
 ```js
 /**
  * initialize your data structure here.
@@ -50,10 +54,6 @@ var MedianFinder = function() {
  * @return {void}
  */
 MedianFinder.prototype.addNum = function(num) {
-    if (this.arr.length == 0) {
-        this.arr.push(num)
-        return
-    }
     let i = 0, j = this.arr.length - 1
     while (i <= j) {
         let mid = (i + j) >> 1
@@ -88,3 +88,6 @@ MedianFinder.prototype.findMedian = function() {
  * var param_2 = obj.findMedian()
  */
 ```
+
+- 查找的时间复杂度O(1)
+- 插入的时间复杂度O(logN)

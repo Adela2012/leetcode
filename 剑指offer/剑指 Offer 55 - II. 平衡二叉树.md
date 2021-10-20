@@ -44,6 +44,10 @@
 # 解题
 **解题1**
 自下到上
+1. getDepth获取深度，
+2. 同时判断左右子树的深度差相差是否超过1，
+3. 如果不超过，返回当前树的最大值，
+4. 否则返回-1
 ```js
 /**
  * Definition for a binary tree node.
@@ -70,9 +74,15 @@ var isBalanced = function(root) {
      
 };
 ```
+- 时间复杂度 O(N)
+- 空间复杂度 O(N)
 
 **解题2**
 自上到下
+1. 首先getDepth为获取node的最大深度
+2. 比较root的左子树和右子树的最大深度的绝对值不超过1
+3. root的左子树也是平衡树
+4. root的右子树也是平衡树
 
 ```js
 /**
@@ -87,13 +97,15 @@ var isBalanced = function(root) {
  * @return {boolean}
  */
 var isBalanced = function(root) {
-    if(root == null) return true
+    if (!root) return true
     return Math.abs(getDepth(root.left) - getDepth(root.right)) <= 1 && isBalanced(root.left) && isBalanced(root.right)
+    
+    function getDepth(node) {
+        if (!node) return 0
+        return Math.max(getDepth(node.left), getDepth(node.right)) + 1
+    };
 };
-function getDepth(node) {
-    if (node == null) return 0
-    let left = getDepth(node.left)
-    let right = getDepth(node.right)
-    return Math.max(left, right) + 1
-}
+
 ```
+- 时间复杂度 O(NlogN)
+- 空间复杂度 O(N)

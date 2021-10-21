@@ -40,14 +40,8 @@
  * @return {number}
  */
 var maxDepth = function(root) {
-    function getDepth(node) {
-        if (node == null) return 0
-        let left = getDepth(node.left)
-        let right = getDepth(node.right)
-        return Math.max(left, right) + 1
-    }
-
-    return getDepth(root)
+    if (!root) return 0
+    return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1
 };
 ```
 **解题2**
@@ -68,7 +62,7 @@ var maxDepth = function(root) {
     let res = 0
     function dfs(node, level) {
         if (node == null) return 
-        if (!node.left && !node.right && level > res) res = level 
+        if (level > res) res = level 
         dfs(node.left, level + 1)
         dfs(node.right, level + 1)
     }

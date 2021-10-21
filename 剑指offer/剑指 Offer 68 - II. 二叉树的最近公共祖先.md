@@ -5,8 +5,9 @@
 
 例如，给定如下二叉树:  root = [3,5,1,6,2,0,8,null,null,7,4]
 
+![logo](https://pic.leetcode-cn.com/1627997023-aoYRNR-file_1627997022284){:width="0" height="0" align="left"}
+![binarytree](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/15/binarytree.png)
 
-<img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/15/binarytree.png" alt="" />
  
 
 示例 1:
@@ -50,18 +51,20 @@ p、q 为不同节点且均存在于给定的二叉树中。
  * @param {TreeNode} q
  * @return {TreeNode}
  */
+
 var lowestCommonAncestor = function(root, p, q) {
     let res = root
-    function dfs(node) {
-        if (node == null) return false
-        let isLeft = dfs(node.left)
-        let isRight = dfs(node.right)
-        let isNode = node.val == p.val || node.val == q.val
-        if ((isLeft && isRight) || (isNode && isLeft) || (isNode && isRight)) res = node
-        return isNode || isLeft || isRight
-    }
     dfs(root)
     return res
+
+    function dfs(node) {
+        if (!node) return
+        let isLeft = dfs(node.left)
+        let isRight = dfs(node.right)
+        let isNode = node == p || node == q
+        if ((isLeft && isRight) || (isNode && isLeft) || (isNode && isRight)) res = node
+        return isLeft || isRight || isNode
+    }
 };
 ```
 
@@ -93,12 +96,10 @@ var lowestCommonAncestor = function(root, p, q) {
         p = parent.get(p.val)
     }
     while(q) {
-        if (visited.has(q.val)) {
-            return q
-        }
+        if (visited.has(q.val)) return q
         q = parent.get(q.val)
     }
-    return null
+    return root
 
     function dfs(node) {
         if (node.left) {

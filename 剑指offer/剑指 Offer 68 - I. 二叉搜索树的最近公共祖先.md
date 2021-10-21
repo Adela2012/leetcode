@@ -6,7 +6,8 @@
 例如，给定如下二叉搜索树:  root = [6,2,8,0,4,7,9,null,null,3,5]
 
 
-<img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/binarysearchtree_improved.png" alt="">
+![logo](https://pic.leetcode-cn.com/1627997023-aoYRNR-file_1627997022284){:width="0" height="0" align="left"}
+![binarysearchtree_improved](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/binarysearchtree_improved.png){:width="0" height="0" align="left"}
  
 
 示例 1:

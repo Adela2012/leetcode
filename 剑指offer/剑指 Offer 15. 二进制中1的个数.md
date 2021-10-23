@@ -46,6 +46,8 @@ var hammingWeight = function(n) {
     return res
 };
 ```
+- 时间复杂度O(k)，k = 32
+- 空间复杂度O(1)
 
 **方法2**
 - & 与运算
@@ -66,6 +68,8 @@ var hammingWeight = function(n) {
     return res
 };
 ```
+- 时间复杂度O(logN)， N = 二进制位中 1 的个数
+- 空间复杂度O(1)
 
 **方法3**
 - n &= n - 1 ： 消去数字 n 最右边的 1
@@ -83,3 +87,5 @@ var hammingWeight = function(n) {
     return res
 };
 ```
+- 时间复杂度O(logN)， N = 二进制位中 1 的个数
+- 空间复杂度O(1)

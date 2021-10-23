@@ -49,17 +49,11 @@
  */
 var buildTree = function(preorder, inorder) {
     if (preorder.length == 0) return null
-    let val = preorder[0]
-    let newNode = new TreeNode(val)
-    let index = inorder.findIndex(i => i == val)
-
-    let leftIn = inorder.slice(0, index)
-    let rightIn = inorder.slice(index + 1)
-    let leftPre = preorder.slice(1, index+1)
-    let rightPre = preorder.slice(index + 1)
-    newNode.left = buildTree(leftPre, leftIn)
-    newNode.right = buildTree(rightPre, rightIn)
-    return newNode
+    let node = new TreeNode(preorder[0])
+    let nodeIndex = inorder.findIndex(i => i == preorder[0])
+    node.left = buildTree(preorder.slice(1, nodeIndex+1), inorder.slice(0, nodeIndex))
+    node.right = buildTree(preorder.slice(nodeIndex + 1), inorder.slice(nodeIndex+1))
+    return node
 };
 ```
 

@@ -28,6 +28,10 @@
 ```
 
 # 解题
+后序遍历：左 -> 右 -> 主
+二叉搜索树： 左边树值比根值小，右边树值比根值大
+
+## 解题1
 ```js
 /**
  * @param {number[]} postorder
@@ -43,3 +47,26 @@ var verifyPostorder = function(postorder) {
     return true
 };
 ```
+## 解题2
+
+```js
+/**
+ * @param {number[]} postorder
+ * @return {boolean}
+ */
+var verifyPostorder = function(postorder) {
+    return  h(0, postorder.length-1)
+    function h(i,j) {
+        if (i >= j) return true
+        let p = 0
+        while(postorder[p] < postorder[j]) p++
+        let m = p
+        while(postorder[p] > postorder[j]) p++
+
+        return p == j &&  h(i,m-1) && h(m, j-1)
+
+    }
+};
+```
+
+

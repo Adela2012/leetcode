@@ -23,11 +23,10 @@ a, b 均可能是负数或 0
  * @return {number}
  */
 var add = function(a, b) {
-    while(b != 0) {
-        let sum = a ^ b
-        let carry = (a & b) << 1
-        a = sum
-        b = carry
+    while(b) {
+        let c = (a & b) << 1 // 进位：与运算+左移一位
+        a ^= b // 非进位和：异或运算
+        b = c
     }
     return a
 };

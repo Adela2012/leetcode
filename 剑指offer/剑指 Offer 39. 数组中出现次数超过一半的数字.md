@@ -42,6 +42,8 @@ var majorityElement = function(nums) {
     return val
 };
 ```
+- 时间复杂度O(N)
+- 空间复杂度O(N)
 
 **方法2**
 - 摩尔投票：票数正负抵消
@@ -51,12 +53,13 @@ var majorityElement = function(nums) {
  * @return {number}
  */
 var majorityElement = function(nums) {
-    let cur = nums[0], voted = 0
+    let cur, voted = 0
     for (let i of nums) {
         if (voted == 0) cur = i
-        if(cur == i) voted++
-        else voted--
+        voted += cur == i ? 1 : -1
     }
     return cur
 };
 ```
+- 时间复杂度O(N)
+- 空间复杂度O(1)

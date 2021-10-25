@@ -31,10 +31,10 @@ var singleNumbers = function(nums) {
         n ^= i
     }
     while((m & n) == 0) {
-        m <<= 1
+        m <<= 1 // 获取 x^y 的 1 的位置，根据此将nums数组划分为两组
     }
     for (let i of nums) {
-        if ((m&i) != 0) x ^= i
+        if (m & i) x ^= i
         else y ^= i
     }
     return [x, y]

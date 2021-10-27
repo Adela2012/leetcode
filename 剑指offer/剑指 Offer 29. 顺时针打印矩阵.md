@@ -22,35 +22,39 @@
 ```
 
 # 解题
+1. 限定左右上下的边界
+2. 第一圈为[top, left, bottom, right] = [0, 0, n - 1, m - 1]
+3. 当top <= bottom && left <= right，循环继续
+4. 通过比价边界值，四个循环，将四条边的数值推入结果数组中。
+5. 下一个循环，将左右上下的边界缩小一圈[top, left, bottom, right] = [top + 1, left + 1, bottom - 1, right - 1]
 ```js
 /**
  * @param {number[][]} matrix
  * @return {number[]}
  */
 var spiralOrder = function(matrix) {
-    if (!matrix.length || !matrix[0].length) return []
-    let n = matrix.length, m = matrix[0].length
-    let [top, left, bottom, right] = [0, 0, n - 1, m - 1]
-
-    const res = []
-    while (top <= bottom && left <= right) {
-        for (let i = left; i <= right; i++) {
+    if(matrix.length == 0 || matrix[0].length == 0) return []
+    const N = matrix.length, M = matrix[0].length, res = []
+    let [top, left, right, bottom] = [0, 0, M - 1, N - 1]
+    while(top <= bottom && left <= right) {
+        for (let i = left; i <= right; i++ ){
             res.push(matrix[top][i])
         }
-        for (let j = top + 1; j <= bottom; j++) {
-            res.push(matrix[j][right])
+        for (let i = top + 1; i <= bottom; i++ ){
+            res.push(matrix[i][right])
         }
-        if (left < right && top < bottom) {
+        if (top < bottom && left < right) {
             for (let i = right - 1; i >= left; i--) {
                 res.push(matrix[bottom][i])
             }
-            for (let j = bottom - 1; j > top; j--) {
-                res.push(matrix[j][left])
+            for (let i = bottom - 1; i >= top + 1; i--) {
+                res.push(matrix[i][left])
             }
         }
-        [top, left, bottom, right] = [top + 1, left + 1, bottom - 1, right - 1]
+        [top, left, right, bottom] = [top+1, left+1, right-1, bottom-1]
     }
     return res
-    
 };
 ```
+- 时间复杂度O(MN)
+- 空间复杂度O(1)

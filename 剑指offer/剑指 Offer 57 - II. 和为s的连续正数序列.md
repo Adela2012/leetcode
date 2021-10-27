@@ -24,6 +24,11 @@
 ```
 
 # 解题
+1. 双指针i, j，s为[i, j]区间的和
+2. 比较区间和s和target的大小
+3. 若一样大，就将该区间[i, j]的值推入到结果数组res中
+4. 若s >= target，说明应该减小区间[i, j]，将区间和s减去i，并执行i++
+5. 若s < target，说明应该扩大区间[i, j]，执行j++，并区间和s加上j
 ```js
 /**
  * @param {number} target
@@ -48,3 +53,5 @@ var findContinuousSequence = function(target) {
     return res
 };
 ```
+- 时间复杂度O(N)
+- 空间复杂度O(1)

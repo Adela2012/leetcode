@@ -26,7 +26,12 @@ pushed 是 popped 的排列。
 ```
 
 # 解题
-
+## 解题1 
+1. stack数组用于模拟推入栈的顺序
+2. 遍历popped推出值i，当stack为空或者stack的栈顶值不为popped推出值i时，持续将pushed中的值推入
+3. while循环结束时，比较stack栈顶值是不是为popped推出值i，不是，直接返回false
+4. 将stack栈顶元素出栈，开始popped下一个出栈值i的比较
+5. 最后循环结束，返回true
 ```js
 /**
  * @param {number[]} pushed
@@ -44,5 +49,31 @@ var validateStackSequences = function(pushed, popped) {
     }
 
     return true
+};
+```
+- 时间复杂度 O(N)
+- 空间复杂度 O(N)
+
+## 解题2
+1. stack数组用于模拟推入栈的顺序
+2. 遍历pushed推出值i，将推入到stack栈中
+3. 循环比较stack栈顶元素和popped[k]推出值是否相等，如果相等，将stack栈顶元素出栈，并执行k++
+4. 最后返回stack是否为空
+```js
+/**
+ * @param {number[]} pushed
+ * @param {number[]} popped
+ * @return {boolean}
+ */
+var validateStackSequences = function(pushed, popped) {
+    let stack = [], k = 0
+    for (let i of pushed) {
+        stack.push(i)
+        while (stack.length && stack[stack.length - 1] == popped[k]) {
+            stack.pop()
+            k++
+        }
+    }
+    return stack.length == 0
 };
 ```

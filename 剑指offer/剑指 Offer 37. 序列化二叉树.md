@@ -5,13 +5,13 @@
 示例: 
 
 你可以将以下二叉树：
-
+```
     1
    / \
   2   3
      / \
     4   5
-
+```
 序列化为 "[1,2,3,null,null,4,5]"
 注意：本题与主站 297 题相同：https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/
 
@@ -37,14 +37,14 @@ var serialize = function(root) {
     if (root == null) return "[]"
     let queue = [root], res = []
     while(queue.length) {
-            let node = queue.shift()
-            if (node != null) {
-                queue.push(node.left)
-                queue.push(node.right)
-                res.push(node.val)
-            } else {
-                res.push(null)
-            }
+        let node = queue.shift()
+        if (node != null) {
+            queue.push(node.left)
+            queue.push(node.right)
+            res.push(node.val)
+        } else {
+            res.push(null)
+        }
     }
     return JSON.stringify(res)
 };

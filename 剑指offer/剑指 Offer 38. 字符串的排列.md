@@ -27,8 +27,7 @@
  * @return {string[]}
  */
 var permutation = function(s) {
-    const res = []
-    let c = s.split('')
+    const res = [], c = s.split('')
     dfs(0)
     return res
 
@@ -65,24 +64,20 @@ function swap(arr, x, y) {
  * @return {string[]}
  */
 var permutation = function(s) {
-    const res = new Set()
-    backtrack(s, '', [], res)
-    return [...res]
+    const set = new Set(), visited = {}
+    backtrack('')
+    return [...set]
+
+    function backtrack(temp) {
+        if (temp.length == s.length) return set.add(temp)
+        for (let i = 0; i < s.length; i++) {
+            if(visited[i]) continue
+            visited[i] = true
+            backtrack(temp+s[i])
+            visited[i] = false
+        }
+    }
 };
-
-function backtrack(chars, temp, visited, res) {
-    if (temp.length == chars.length) {
-        res.add(temp)
-        return
-    }
-
-    for (let i = 0; i < chars.length; i++) {
-        if (visited[i]) continue
-        visited[i] = true
-        backtrack(chars, temp+chars[i], visited, res) 
-        visited[i] = false
-    }
-}
 ```
 
 回溯算法经典模板

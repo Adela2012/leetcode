@@ -1,5 +1,7 @@
 # 剑指 Offer 19. 正则表达式匹配
 
+
+
 请实现一个函数用来匹配包含'. '和'*'的正则表达式。模式中的字符'.'表示任意一个字符，而'*'表示它前面的字符可以出现任意次（含0次）。在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串"aaa"与模式"a.a"和"ab*ac*a"匹配，但与"aa.a"和"ab*a"均不匹配。
 
 示例 1:
@@ -56,25 +58,24 @@ p 可能为空，且只包含从 a-z 的小写字母以及字符 . 和 *�
  * @return {boolean}
  */
 var isMatch = function(s, p) {
-    let m = s.length + 1, n = p.length + 1
-    let dp = []
-    for (let i = 0; i < m; i++) {
-        dp.push(Array(n).fill(0))
+    const n = s.length + 1, m = p.length + 1, dp = []
+    for (let i = 0; i < n; i++) {
+        dp.push(Array(m).fill(0))
     }
     dp[0][0] = true
-    for (let j = 2; j < n; j += 2) {
-         dp[0][j] = p[j-1] == '*' && dp[0][j - 2]
+    for(let j = 2; j < m; j += 2) {
+        dp[0][j] = dp[0][j - 2] && p[j - 1] == '*'
     }
-
-    for (let i = 1; i < m; i++) {
-        for (let j = 1; j < n; j++) {
+    for (let i = 1; i < n; i++) {
+        for (let j = 1; j < m; j++) {
             if (p[j-1] == '*') {
-                dp[i][j] = dp[i][j-2] || dp[i-1][j] &&(s[i-1] == p[j-2] || p[j-2] == '.')
+                dp[i][j] = dp[i][j-2] || dp[i-1][j] && (s[i-1] == p[j-2] || p[j-2] == '.')
             } else {
-                dp[i][j] = dp[i-1][j-1] && (p[j-1] == '.' || s[i-1] == p[j-1])
+                dp[i][j] = dp[i-1][j-1] && (s[i-1] == p[j-1] || p[j-1] == '.')
             }
         }
     }
-    return dp[m-1][n-1]
+    return dp[n-1][m-1]
+
 };
 ```

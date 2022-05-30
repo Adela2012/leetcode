@@ -37,3 +37,87 @@ n == matrix[i].length
 
 注意：本题与主站 329 题相同： https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/
 
+# 解题
+```js
+/**
+ * @param {number[][]} matrix
+ * @return {number}
+ */
+var longestIncreasingPath = function(matrix) {
+    const dirs = [[0,1],[0,-1],[1,0],[-1,0]]
+
+    const n = matrix.length, m = matrix[0].length
+    const memos = new Array(n).fill(0).map(() => new Array(m).fill(0))
+    let ans = 0
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < m; j++) {
+            ans = Math.max(ans, dfs(i, j))
+        }
+    }
+    return ans
+
+
+    function dfs(i, j) {
+        if (memos[i][j] != 0) return memos[i][j]
+        memos[i][j]++
+        for (const dir of dirs) {
+            const x = i + dir[0], y = j + dir[1]
+            if (x >= 0 && x < n && y >= 0 && y < m && matrix[x][y] > matrix[i][j]) {
+                memos[i][j] = Math.max(memos[i][j], dfs(x, y)+1)
+            }
+        }
+        return memos[i][j]
+    }
+
+};
+```
+
+## 解题2
+```js
+/**
+ * @param {number[][]} matrix
+ * @return {number}
+ */
+var longestIncreasingPath = function(matrix) {
+    const n = matrix.length, m = matrix[0].length
+    const dirs = [[1,0],[-1,0],[0,1],[0,-1]]
+    const dp = new Array(n).fill(0).map(() => new Array(m).fill(0))
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < m; j++) {
+            for (let d of dirs) {
+                const x = i + d[0], y = j + d[1]
+                if (x >= 0 && x < n && y >= 0 && y < m && matrix[x][y] > matrix[i][j]) {
+                    ++dp[i][j]
+                }
+            }
+        }
+    }
+    const queue = []
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < m; j++) {
+            if (dp[i][j] == 0) {
+                queue.push([i,j])
+            }
+        }
+    }
+    let ans = 0
+    while(queue.length) {
+        const size = queue.length
+        ans++
+        for (let k = 0; k < size; k++) {
+            const [i,j] = queue.shift()
+            for (let d of dirs) {
+                let x = i + d[0], y = j + d[1]
+                if (x >= 0 && x < n && y >= 0 && y < m && matrix[x][y] < matrix[i][j]) {
+                    --dp[x][y]
+                    if (dp[x][y] == 0) {
+                        queue.push([x,y])
+                    }
+                }
+            }
+        }
+    }
+    return ans
+
+};
+```

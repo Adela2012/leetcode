@@ -41,62 +41,11 @@ seqs[i][j] 是 32 位有符号整数
 注意：本题与主站 444 题相同：https://leetcode-cn.com/problems/sequence-reconstruction/
 
 # 解题
-## 解题1
+
 BFS
 构建图edges和节点的入度节点数量indeg。
-```js
-/**
- * @param {number[]} org
- * @param {number[][]} seqs
- * @return {boolean}
- */
-var sequenceReconstruction = function(org, seqs) {
-    const edges = new Map(), queue = [], indeg = new Map(), ans = []
 
-    for (let seq of seqs) {
-        for (let i of seq) {
-            if (!edges.has(i)) {
-                edges.set(i, [])
-                indeg.set(i, 0)
-            }
-        }
-    }
-
-    if (edges.size !== org.length) return false
-    if (org.length == 1 && !edges.has(org[0])) return false
-
-    for (let seq of seqs) {
-        for (let i = 1; i < seq.length; i++) {
-            edges.get(seq[i-1]).push(seq[i])
-            indeg.set(seq[i], indeg.get(seq[i])+1)
-        }
-    }
-
-    for (let [key, value] of indeg) {
-        if (value == 0) queue.push(key)
-    }
-
-    while(queue.length) {
-        if (queue.length > 1) return false
-        const node = queue.shift()
-        ans.push(node)
-        const list = edges.get(node)
-        for (let i of list) {
-            indeg.set(i, indeg.get(i)-1)
-            if (indeg.get(i) == 0) {
-                queue.push(i)
-            }
-        }
-    }
-    for (let i = 0; i < org.length; i++) {
-        if (org[i] != ans[i]) return false
-    }
-    return true
-};
-```
-
-## 解题2
-此题不使用ans的额外数组，而是采用index，去比较org下标的值是否相同，因此需要在最后比较一下index的长度，需要正好等于org.length才行。否则如果是有环的情况，前面index都是相同的，遇到环就queue就空了，会造成index < org.length
+采用index，去比较org下标的值是否相同，需要在最后比较一下index的长度，正好等于org.length才行。否则如果是有环的情况，前面index都是相同的，遇到环就queue就空了，会造成index < org.length。
 ```js
 /**
  * @param {number[]} org

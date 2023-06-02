@@ -55,3 +55,24 @@ var relativeSortArray = function(arr1, arr2) {
 ```
 - 时间复杂度：O(N + KlogK)，N = arr1.length，K 为不在arr2中出现的arr1中剩余的数量
 - 空间复杂度：O(M)，存储map所用空间
+
+
+```js
+var relativeSortArray = function(arr1, arr2) {
+    return arr1.sort((
+        a, b, 
+        i = arr2.findIndex(v => v === a), 
+        j = arr2.findIndex(v => v === b)
+    ) => (i === -1 ? 1000 + a : i) - (j === -1 ? 1000 + b : j))
+};
+
+```
+
+```js
+var relativeSortArray = function(arr1, arr2, r = [], h = Object.create(null)) {
+    arr1.forEach(v => h[v] = (h[v] || 0) + 1)
+    arr2.forEach(v => (r = r.concat(Array(h[v]).fill(v)), delete h[v]))
+    return Object.keys(h).forEach(v => r = r.concat(Array(h[v]).fill(v))), r
+};
+
+```

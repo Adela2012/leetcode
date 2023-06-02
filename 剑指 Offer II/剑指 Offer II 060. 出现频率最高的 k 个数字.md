@@ -33,9 +33,8 @@ k 的取值范围是 [1, 数组中不相同的元素的个数]
 ## 解题1
 单调栈
 1. 遍历 nums 数组，使用 map 统计每个数字出现的次数。
-2. 维持一个单间递减栈 MiniStack，遍历map，将次数加入栈中，栈顶元素为：频率最高的次数 kVal。
-3. 再次遍历 map，将次数大于 kVal 的数字加入到结果数组 arr 中。
-4. 最后返回 arr。
+2. 维持一个单间递减栈 MiniStack，遍历map，将次数数组[key,value]加入栈中，栈顶元素频率最高。
+3. 最后返回栈的数组 key。
 
 在MiniStack中：
 1. 传入栈的大小，k，并初始化stack
@@ -50,23 +49,19 @@ k 的取值范围是 [1, 数组中不相同的元素的个数]
  * @return {number[]}
  */
 var topKFrequent = function(nums, k) {
-    const map = new Map()
-    for (const i of nums) {
-        map.set(i, map.has(i) ? map.get(i)+1 : 1)
+    const map = new Map(), stack = []
+    for (let i of nums) {
+        map.set(i, 1 + (map.get(i) || 0))
     }
-    const stack = new MiniStack(k)
-    for (const [key, val] of map) {
-        stack.add(val)
+
+    this.ms = new MiniStack(k)
+    for (let [key, value] of map) {
+        this.ms.add([key, value])
     }
-    const kVal = stack.peek()
-    const arr = []
-    for (const [key, val] of map) {
-        if (val >= kVal ) {
-            arr.push(key)
-        }
-    }
-    return arr
+    return this.ms.getValues()
+    
 };
+
 
 class MiniStack {
     constructor(k) {
@@ -75,7 +70,7 @@ class MiniStack {
     }
     add(val) {
         const tmp = []
-        while(this.stack.length && this.peek() < val) {
+        while(this.stack.length && this.peek()[1] < val[1]) {
             tmp.push(this.stack.pop())
         }
         if (this.stack.length < this.k) {
@@ -88,7 +83,11 @@ class MiniStack {
     peek() {
         return this.stack[this.stack.length-1]
     }
+    getValues() {
+        return this.stack.map(i => i[0])
+    }
 }
+
 ```
 
 

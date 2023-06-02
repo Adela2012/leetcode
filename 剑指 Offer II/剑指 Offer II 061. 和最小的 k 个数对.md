@@ -53,12 +53,12 @@ nums1, nums2 均为升序排列
  */
 var kSmallestPairs = function(nums1, nums2, k) {
     const map = new Map()
-    for(const i in nums1) {
-        for (const j in nums2) {
-            map.set([i, j, nums1[i]+nums2[j]], [nums1[i], nums2[j]])
-        }   
+    for(let i of nums1) {
+        for (let j of nums2) {
+            map.set([i + j], [i, j])
+        }
     }
-    return [...map].sort((a,b) => (a[0][2]-b[0][2])).map(a => a[1]).slice(0, k)
+    return [...map].sort((a,b) => a[0][0] - b[0][0]).map(i => i[1]).slice(0, k)
 };
 ```
 - 时间复杂度：O(NlogN)，N = nums1.length * nums2.length

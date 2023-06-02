@@ -36,6 +36,7 @@ isConnected[i][j] == isConnected[j][i]
 
 
 # 解题
+## 解题1
 DFS
 ```js
 /**
@@ -64,7 +65,7 @@ var findCircleNum = function(isConnected) {
     }
 };
 ```
-
+## 解题2
 BFS
 ```js
 /**
@@ -95,3 +96,46 @@ var findCircleNum = function(isConnected) {
     
 };
 ```
+## 解题3
+并查集
+
+如果之前没有接触过并查集，做这道题之前先看一下[剑指 Offer II 118. 多余的边](https://leetcode.cn/problems/7LpjUW/solution/by-adela2012-9rpk/)的内容会好很多。
+
+1. 转化成一个图，城市是一个个节点，城市之间是否相似看成节点之间的边。
+2. 可以将题目转化成有多少个单独的节点，也就是`f`数组中下标和元素相同的数量有多少。
+
+其中有2个需要理解一下
+
+1. 向上找连通的根节点
+```js
+const find = i => i == f[i] ? i : find(f[i])
+```
+
+
+2. 当城市i，j的连通根节点不同，且城市间相连时，将这两个连通。
+```js
+const f1 = find(i), f2 = find(j)
+if (isConnected[i][j] == 1 && f1 != f2) {
+    f[f1] = f2
+}
+```
+
+```ts
+function findCircleNum(isConnected: number[][]): number {
+    const n = isConnected.length
+    const f = new Array(n).fill(0).map((_,i) => i)
+    const find = i => i == f[i] ? i : find(f[i])
+
+    for (let i = 0; i < n; i++) {
+        for (let j = i + 1; j < n; j++) {
+            const f1 = find(i), f2 = find(j)
+            if (isConnected[i][j] == 1 && f1 != f2) {
+                f[f1] = f2
+            }
+        }
+    }
+    return f.filter((v, i) => v == i).length
+};
+```
+- 时间复杂度：O(N^2)
+- 空间复杂度：O(N)

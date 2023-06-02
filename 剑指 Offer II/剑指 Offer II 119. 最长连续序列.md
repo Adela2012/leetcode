@@ -49,3 +49,35 @@ function longestConsecutive(nums: number[]): number {
 ```
 - 时间复杂度：O(N)
 - 空间复杂度：O(N)
+
+## 解题2
+并查集
+```js
+function longestConsecutive(nums: number[]): number {
+    const map = new Map()
+    const f = nums.map((_,i) => i)
+    const size = new Array(nums.length).fill(1)
+
+    const find = i => i == f[i] ? i : find(f[i])
+    const union = (i,j) => {
+        let f1 = find(i), f2 = find(j)
+        if (f1 !== f2) {
+            f[f1] = f2
+            size[f2] += size[f1]
+        }
+    }
+
+    for (let i = 0; i < nums.length; i++) {
+        if (map.has(nums[i])) continue
+        if (map.has(nums[i]-1)) union(i, map.get(nums[i]-1))
+        if (map.has(nums[i]+1)) union(i, map.get(nums[i]+1))
+        map.set(nums[i], i)
+    }
+
+    let max = 0
+    for (let i = 0; i < f.length; i++) {
+        max = Math.max(max, size[i])
+    }
+    return max
+};
+```

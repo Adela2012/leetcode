@@ -43,9 +43,11 @@ prerequisites 中不存在重复元素
 
 # 解题
 
-## 解题1
+
 BFS 
-```js
+
+
+```javaScript []
 /**
  * @param {number} numCourses
  * @param {number[][]} prerequisites
@@ -76,4 +78,38 @@ var findOrder = function(numCourses, prerequisites) {
 };
 ```
 
-## 解题2
+
+```typeScript []
+function findOrder(numCourses: number, prerequisites: number[][]): number[] {
+    const edges = new Map(), indeg = new Map()
+
+    for (let i = 0; i < numCourses; i++) {
+        if (!edges.has(i)) edges.set(i, [])
+        if (!indeg.has(i)) indeg.set(i, 0)
+    }
+
+    for (let [a, b] of prerequisites) {
+        edges.get(b).push(a)
+        indeg.set(a, indeg.get(a) + 1)
+    }
+    const queue = [], ans = []
+    for (let [key, val] of indeg) {
+        if (val == 0) queue.push(key)
+    }
+
+    while(queue.length) {
+        let node = queue.shift()
+        let arr = edges.get(node)
+        ans.push(node)
+        for (let i of arr) {
+            indeg.set(i, indeg.get(i) - 1)
+            if (indeg.get(i) == 0) {
+                queue.push(i)
+            }
+        }
+    }
+
+    return ans.length == numCourses ? ans : []
+
+};
+```

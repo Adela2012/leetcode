@@ -48,7 +48,6 @@
  * @return {number[][]}
  */
 var threeSum = function(nums) {
-    if (nums.length < 3) return [] 
     nums.sort((a,b) => a - b)
     const res = []
     for (let i = 0; i < nums.length; i++) {

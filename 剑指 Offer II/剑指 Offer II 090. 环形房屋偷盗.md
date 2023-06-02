@@ -65,3 +65,23 @@ var rob = function(nums) {
 ```
 - 时间复杂度O(N)
 - 空间复杂度O(1)
+
+
+```ts
+function rob(nums: number[]): number {
+    const h = (i:number , j:number) => {
+        let pre = 0, cur = nums[i]
+        for (let k = i + 1; k <= j; k++) {
+            let next = Math.max(pre+nums[k], cur)
+            pre = cur
+            cur = next
+        }
+        return cur
+    }
+
+    const n = nums.length
+    if (n == 1) return nums[0]
+    if (n == 2) return Math.max(...nums)
+    return Math.max(h(0, n-2), h(1, n-1))
+};
+```

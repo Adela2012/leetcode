@@ -97,3 +97,24 @@ var subsets = function(nums) {
 ```
 - 时间复杂度：O(N2^N)，N = nums.length
 - 空间复杂度：O(N)
+
+```js
+var subsets = function(arr) {
+    const tmp = [], ans = []
+    dfs(0)
+    return ans
+
+    function dfs(start) {
+        if (start > arr.length) return
+        ans.push(tmp.slice())
+
+        for (let i = start; i < arr.length; i++) {
+            tmp.push(arr[i])
+            dfs(i+1)
+            tmp.pop()
+        }
+
+        
+    }
+};
+```

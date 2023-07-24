@@ -2,15 +2,69 @@
 
 如图所示，二叉树的遍历方式有深度优先DFS的三种方式，后序、前序、中序，还有广度优先BFS遍历方式。
 
-<img src="images/145_transverse.png">
+<img src="https://leetcode.com/problems/pseudo-palindromic-paths-in-a-binary-tree/Figures/1457/dfs.png">
 
 <br>
 
-### 1. 后序遍历
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+```
 
+### 1. 先序遍历
+使用栈，将后出的右树先压入栈，再将左树压入栈
+```js
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var levelOrder = function(root) {
+    if (root == null) return []
+    let stack = [root]
+    let res = []
+    while(stack.length) {
+        let node = stack.pop()
+        res.push(node.val)
+        if (node.right) stack.push(node.right)
+        if (node.left) stack.push(node.left)
+    }
+    return res
+};
+```
 
 ### 2. 中序遍历
 
+### 3. 中序遍历
+### 4. 广度遍历
+```js
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var levelOrder = function(root) {
+    if (root == null) return []
+    let queue = [root]
+    let res = []
+    while(queue.length) {
+        let node = queue.shift()
+        res.push(node.val)
+        if (node.left) queue.push(node.left)
+        if (node.right) queue.push(node.right)
+    }
+    return res
+};
+```
+
+
+
+
+
+## 题
 ### 3. 中序遍历 原题 [98. Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
 
 【题目】
@@ -94,5 +148,5 @@ var isValidBST = function(root) {
 <br>
 
 
-### 4. 广度遍历
+
 

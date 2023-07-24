@@ -37,43 +37,7 @@ L0 → Ln → L1 → Ln-1 → L2 → Ln-2 → …
 注意：本题与主站 143 题相同：https://leetcode-cn.com/problems/reorder-list/ 
 
 # 解题
-## 解题1
-1. 使用额外空间数组arr，用于存储每个链表节点
-2. 改变arr数组的头尾节点的next指针指向，直至i,j节点相遇
-3. 改变最后节点arr[i]的节点next指向，设为null
-```js
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
-/**
- * @param {ListNode} head
- * @return {void} Do not return anything, modify head in-place instead.
- */
-var reorderList = function(head) {
-    let arr = [], p = head
-    while(p) {
-        arr.push(p)
-        p = p.next
-    }
-    let i = 0, j = arr.length - 1
-    while(i < j) {
-        arr[i].next = arr[j]
-        i++
-        if(i == j) break
-        arr[j].next= arr[i]
-        j--
-    }
-    arr[i].next = null
-};
-```
-- 时间复杂度O(N)
-- 空间复杂度O(N)
 
-# 解题2
 寻找链表中点 + 链表逆序 + 合并链表
 ```js
 /**

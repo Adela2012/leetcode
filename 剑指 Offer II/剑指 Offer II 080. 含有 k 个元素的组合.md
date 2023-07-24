@@ -63,6 +63,27 @@ var combine = function(n, k) {
 };
 ```
 
+```js
+function combine (n, k) {
+    const ans = [], tmp = []
+    dfs(1)
+    function dfs(start) {
+        if (tmp.length + (n - start + 1) < k) return
+        if (tmp.length == k) {
+            ans.push(tmp.slice())
+            return
+        }
+        for (let i = start; i <= n; i++) {
+            tmp.push(i)
+            dfs(i + 1)
+            tmp.pop()
+        }
+    }
+    return ans
+}
+
+```
+
 ## 解题2
 ```js
 /**

@@ -36,10 +36,9 @@ piles.length <= H <= 10^9
 注意：本题与主站 875 题相同： https://leetcode-cn.com/problems/koko-eating-bananas/
 
 # 解题
-1. needHour计算传入的K速度，吃完全部香蕉所需要的时间。
-2. K速度的取值范围[1, max(piles)]，即吃香蕉的速度，一小时最小吃一根left，最大吃香蕉堆数最大的数right。
-3. 二分查找[left, right]范围，得出needHour正好满足h。
-4. 
+1. K速度的取值范围[1, max(piles)]，即吃香蕉的速度，一小时最小吃一根left，最大吃香蕉堆数最大的数right。
+2. 二分查找[left, right]的左边界。
+3. needHour计算吃完全部香蕉所需要的时间。
 ```js
 /**
  * @param {number[]} piles
@@ -47,27 +46,17 @@ piles.length <= H <= 10^9
  * @return {number}
  */
 var minEatingSpeed = function(piles, h) {
-    let left = 1, right = 0
-    for (const pile of piles) {
-        if (pile > right) right = pile
-    }
+    let left = 1, right = Math.max(...piles)
     while(left < right) {
         const mid = left + ((right - left) >> 1)
-        if (needHour(mid) > h) {
+        const needHour = piles.reduce((hour, pile) => hour + Math.ceil(pile / mid), 0)
+        if (needHour > h) {
             left = mid + 1
         } else {
             right = mid
         }
     }
     return left
-
-    function needHour(K) {
-        let hour = 0
-        for (const pile of piles) {
-            hour += Math.ceil(pile / K)
-        }
-        return hour
-    }
 };
 ```
 - 时间复杂度O(logN)

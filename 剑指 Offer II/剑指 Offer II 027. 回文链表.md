@@ -15,7 +15,7 @@
 ```
 示例 2：
 
-![image2](https://pic.leetcode-cn.com/1626422231-wgvnWh-image.png.png){:width="138" height="62"  align="left"}
+![image2](https://pic.leetcode-cn.com/1626422231-wgvnWh-image.png){:width="138" height="62"  align="left"}
 ```
 输入: head = [1,2]
 输出: false

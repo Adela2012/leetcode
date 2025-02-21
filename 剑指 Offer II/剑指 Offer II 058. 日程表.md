@@ -41,6 +41,12 @@ MyCalendar.book(20, 30); // returns true ，第三个日程安排可以添加到
 3. 若不符合，返回false
 4. 若符合将时间段存入arr数组中，
 
+范围是否符合：
+1. 对于两个区间[s1,e1)，[s2,e2)，
+2. 如果 s1 >= e2 || s2 >= e1，则两者不会发生交集。
+3. 如果 s1 < e2 && s2 < e1，则两者会发生交集。
+
+
    
 ```js
 var MyCalendar = function() {

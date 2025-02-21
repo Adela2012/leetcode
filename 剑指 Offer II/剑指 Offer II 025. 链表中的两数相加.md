@@ -113,26 +113,16 @@ var addTwoNumbers = function(l1, l2) {
 
     l1 = reverseList(l1)
     l2 = reverseList(l2)
-    return addList(l1, l2)
-
-    function addList(l1, l2) {
-        let carry = 0, pre = null
-        while(l1 || l2 || carry) {
-            let sum = carry
-            if (l1) sum += l1.val
-            if (l2) sum += l2.val
-
-            carry = parseInt(sum / 10)
-            let node = new ListNode(sum % 10)
-            node.next = pre
-            pre = node
-
-            if (l1) l1 = l1.next
-            if (l2) l2 = l2.next
-        }
-        return pre
+   
+   let carry = 0, pre = null
+    while(l1 || l2 || carry) {
+        carry += (l1 ? l1.val : 0) + (l2 ? l2.val : 0)
+        pre = new ListNode(carry % 10, pre)
+        carry = parseInt(carry / 10)
+        if (l1) l1 = l1.next
+        if (l2) l2 = l2.next
     }
-
+    return pre
 
     function reverseList (head) {
         let p = head, pre = null

@@ -40,7 +40,7 @@
  * @return {number}
  */
 var subarraySum = function(nums, k) {
-    const map = new Map([[0,1]])
+    const map = new Map([[0,1]]) // 和为0的子数组个数为1
     let sum = 0, res = 0
     for (let n of nums) {
         sum += n

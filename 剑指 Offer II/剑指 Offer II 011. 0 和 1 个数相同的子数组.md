@@ -31,10 +31,11 @@ nums[i] 不是 0 就是 1
  * @return {number}
  */
 var findMaxLength = function(nums) {
-    let map = new Map([[0, -1]])
+    let map = new Map([[0, -1]]) // 和为0的下标-1
     let sum = 0, maxLen = 0
     for (let i = 0; i < nums.length; i++) {
         sum += nums[i] ? 1 : -1
+        // 如果当前位置出现和前面一样的sum，说明中间一定经过了相同数量的0和1
         if (map.has(sum)) {
             maxLen = Math.max(maxLen, i - map.get(sum))
         } else {

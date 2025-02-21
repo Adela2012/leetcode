@@ -70,3 +70,32 @@ var groupAnagrams = function(strs) {
 N为strs的长度，M为strs[i]的长度
 - 时间复杂度O(NM)
 - 空间复杂度O(N)
+
+
+## 解题2
+换种解法
+```js
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+var groupAnagrams = function(strs) {
+    const map = new Map()
+    for (let str of strs) {
+        const newStr = h(str)
+        map.has(newStr) ?
+            map.get(newStr).push(str) :
+            map.set(newStr, [str])
+    }
+    return [...map.values()]
+
+    function h(str) {
+        const arr = new Array(26).fill(0)
+        for (let i = 0; i < str.length; i++) {
+            const index = str.charCodeAt(i) - 'a'.charCodeAt()
+            arr[index]++
+        }
+        return arr.join(',')
+    }
+};
+```
